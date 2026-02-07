@@ -1,0 +1,64 @@
+/* src/components/CameraCapture.css */
+
+/* Make the container fill the EXACT height of the phone screen */
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh; /* 90% of Viewport Height */
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* The area where the image goes */
+.image-area {
+  flex-grow: 1; /* Take up all available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px dashed #ccc;
+}
+
+/* The actual image */
+.photo-preview {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure the whole photo is visible */
+}
+
+/* Placeholder text when empty */
+.placeholder {
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* The bottom controls */
+.controls-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+/* Big, thumb-friendly button */
+.camera-button {
+  background-color: #007bff;
+  color: white;
+  padding: 18px 40px; /* Big padding for thumbs */
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  text-align: center;
+  width: 80%; /* Almost full width */
+}
+
+.camera-button:active {
+  transform: scale(0.95);
+  background-color: #0056b3;
+}
