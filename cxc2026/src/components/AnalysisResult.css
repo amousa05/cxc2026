@@ -1,0 +1,212 @@
+/* src/components/AnalysisResults.css */
+
+/* 1. MAIN CONTAINER */
+.results-container {
+  width: 100%;
+  padding-bottom: 80px; /* Space for bottom scroll */
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+/* 2. LOADING STATE (The fix for your screenshot) */
+.results-container.loading {
+  height: 100%;
+  min-height: 50vh; /* Ensure it takes up vertical space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  padding-top: 50px; /* Push down from the top menu button */
+}
+
+.spinner {
+  font-size: 4rem; /* Big Brain */
+  margin-bottom: 20px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* 3. ERROR STATE */
+.results-container.error {
+  padding: 40px 20px;
+  text-align: center;
+  color: #d32f2f;
+  background: #ffebee;
+  border-radius: 16px;
+  margin-top: 60px;
+  border: 1px solid #ffcdd2;
+}
+
+/* 4. SCORE CARD (Big Circle) */
+.score-card {
+  background: white;
+  border-radius: 24px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Nice soft shadow */
+  margin-bottom: 25px;
+  margin-top: 20px; /* Space from top */
+}
+
+.card-title { 
+  margin: 0 0 20px 0; 
+  color: #888; 
+  font-size: 0.9rem; 
+  text-transform: uppercase; 
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.score-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 10px solid #eee; /* Default grey ring */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+.score-number { 
+  font-size: 3.5rem; 
+  font-weight: 800; 
+  line-height: 1;
+  color: #333;
+}
+
+.score-label { 
+  font-size: 1rem; 
+  color: #aaa; 
+  margin-top: 5px;
+}
+
+/* 5. THE BAR CHART */
+.bar-section {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-bar-container {
+  display: flex;
+  height: 16px; /* Thicker bar */
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.bar-segment { height: 100%; transition: width 1s ease-out; }
+.bar-segment.positive { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+.bar-segment.negative { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+
+/* 6. REASONS (Bullet Points) */
+.reasons-section { margin-bottom: 30px; }
+
+.reason-box {
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  border-left: 6px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.reason-box.good { border-left-color: #2ecc71; background: #f0fdf4; }
+.reason-box.bad { border-left-color: #e74c3c; background: #fef2f2; }
+
+.reason-box h4 { margin: 0 0 10px 0; font-size: 1rem; color: #333; }
+.reason-box ul { margin: 0; padding-left: 20px; color: #555; }
+.reason-box li { margin-bottom: 6px; line-height: 1.4; }
+
+/* 7. DROPDOWNS */
+.section-header { 
+  margin: 30px 0 15px; 
+  font-size: 1.2rem; 
+  color: #333; 
+  font-weight: 700;
+  padding-left: 5px;
+}
+
+.ing-dropdown {
+  background: white;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: transform 0.2s;
+}
+
+.ing-dropdown summary {
+  padding: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  font-size: 1rem;
+}
+.ing-dropdown summary::-webkit-details-marker { display: none; }
+
+/* Status Colors */
+.ing-dropdown.red summary { border-left: 6px solid #e74c3c; color: #c0392b; }
+.ing-dropdown.green summary { border-left: 6px solid #2ecc71; color: #27ae60; }
+.ing-dropdown.orange summary { border-left: 6px solid #f39c12; color: #d35400; }
+.ing-dropdown.grey summary { border-left: 6px solid #95a5a6; color: #7f8c8d; }
+
+.count-badge {
+  background: #f1f3f5;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 700;
+}
+
+.dropdown-content {
+  padding: 15px;
+  background: #fdfdfd;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ing-chip {
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+/* Animations */
+@keyframes slideUp { 
+  from { opacity: 0; transform: translateY(20px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}

@@ -1,11 +1,12 @@
 // src/components/CameraCapture.tsx
 import { useState, type ChangeEvent } from 'react'
 import './CameraCapture.css'
-import AnalysisResults, { type Ingredient } from './AnalysisResult' // Import new component
+import { type RealFoodAnalysis } from '../types' // Import new component
+import AnalysisResults from './AnalysisResult' // Import the new results component
 
 export default function CameraCapture() {
   const [image, setImage] = useState<string | null>(null)
-  const [ingredients, setIngredients] = useState<Ingredient[]>([])
+  const [realFoodAnalysis, setRealFoodAnalysis] = useState<RealFoodAnalysis | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string>("")
 
@@ -16,7 +17,7 @@ export default function CameraCapture() {
       setImage(url)
       
       // Reset states
-      setIngredients([])
+      setRealFoodAnalysis(null)
       setError("")
       setLoading(true)
 
@@ -25,7 +26,7 @@ export default function CameraCapture() {
 
       try {
         // ⚠️ Make sure this IP matches your computer!
-        const response = await fetch("http://172.20.10.3:8000/api/analyze", {
+        const response = await fetch("http://10.189.4.149:8000/api/analyzehardcoded", {
           method: "POST",
           body: formData,
         })
@@ -42,8 +43,8 @@ export default function CameraCapture() {
             parsedData = data.health_analysis;
         }
 
-        if (parsedData?.ingredients) {
-            setIngredients(parsedData.ingredients)
+        if (parsedData) {
+            setRealFoodAnalysis(parsedData)
         } else {
             setError("Could not read ingredients format.")
         }
@@ -56,7 +57,7 @@ export default function CameraCapture() {
     }
   }
 
-  const hasResults = ingredients.length > 0 || loading; // Keep results screen open if loading
+  const hasResults = realFoodAnalysis !== null || loading; // Keep results screen open if loading
 
   return (
     <div className="camera-container">
@@ -78,7 +79,7 @@ export default function CameraCapture() {
 
         {/* RIGHT SIDE: The New Results Component */}
         <AnalysisResults 
-          ingredients={ingredients} 
+          data={realFoodAnalysis} 
           loading={loading} 
           error={error} 
         />
@@ -97,7 +98,7 @@ export default function CameraCapture() {
         />
         
         <label htmlFor="cameraInput" className="camera-button">
-          {loading ? "Scanning..." : (ingredients.length > 0 ? "📸 Scan New" : "📸 Take Photo")}
+          {loading ? "Scanning..." : (realFoodAnalysis ? "📸 Scan New" : "📸 Take Photo")}
         </label>
       </div>
 
